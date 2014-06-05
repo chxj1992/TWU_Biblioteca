@@ -47,6 +47,14 @@ public class BookDaoTest {
         assertFalse(bookDao.checkoutBook("A Tale of Two Cities"));
     }
 
+    @Test
+    public void return_book_successful() {
+        assertTrue(bookDao.returnBook("Lord of the Rings"));
+    }
 
+    @Test
+    public void return_book_not_belong_to_the_library() {
+        assertFalse(bookDao.returnBook("Head First Java"));
+    }
 
 }

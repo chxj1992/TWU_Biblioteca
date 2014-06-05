@@ -48,4 +48,16 @@ public class BookDao {
         return false;
     }
 
+    public boolean returnBook(String bookName) {
+
+        for ( BookModel book : bookList ) {
+            if (book.getBookName().equals(bookName) ) {
+                book.setBookNumber(book.getBookNumber()+1);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
