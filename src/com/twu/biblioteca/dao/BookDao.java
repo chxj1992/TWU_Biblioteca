@@ -1,8 +1,9 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.dao;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.twu.biblioteca.model.BookModel;
 
 import java.util.List;
 
