@@ -3,10 +3,7 @@ package com.twu.biblioteca.dao;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class BookDaoTest {
@@ -22,14 +19,14 @@ public class BookDaoTest {
     public void size_of_book_list_should_be_5 () {
         Integer sizeOfBookList = bookDao.getBookList().size();
 
-        assertThat(sizeOfBookList, is(5));
+        assertEquals((Object) sizeOfBookList, 5);
     }
 
     @Test
     public void size_of_available_book_list_should_be_4 () {
         Integer sizeOfAvailableBookList = bookDao.getAvailableBookList().size();
 
-        assertThat(sizeOfAvailableBookList, is(4));
+        assertEquals((Object) sizeOfAvailableBookList, 4);
     }
 
     @Test

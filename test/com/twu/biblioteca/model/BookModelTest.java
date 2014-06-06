@@ -3,8 +3,7 @@ package com.twu.biblioteca.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 
 public class BookModelTest {
@@ -20,13 +19,12 @@ public class BookModelTest {
     public void book_name_is_right() {
         String expectName = "Gone with the Wind";
 
-        assertThat(bookModel.getBookName(), is(expectName));
+        assertEquals(bookModel.getBookName(), expectName);
     }
 
     @Test
     public void number_of_book_should_be_2() {
-
-        assertThat(bookModel.getBookNumber(), is(2));
+        assertEquals((Object) bookModel.getBookNumber(), 2);
     }
 
 }

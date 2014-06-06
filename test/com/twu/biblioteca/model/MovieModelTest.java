@@ -3,8 +3,7 @@ package com.twu.biblioteca.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 
 public class MovieModelTest {
@@ -20,26 +19,24 @@ public class MovieModelTest {
     public void movie_name_is_right() {
         String expectName = "The Shawshank Redemption";
 
-        assertThat(movieModel.getMovieName(), is(expectName));
+        assertEquals(movieModel.getMovieName(), expectName);
     }
 
     @Test
     public void number_of_movie_should_be_2() {
-
-        assertThat(movieModel.getMovieNumber(), is(2));
+        assertEquals((Object) movieModel.getMovieNumber(), 2);
     }
 
     @Test
     public void rating_of_movie_should_be_9() {
-
-        assertThat(movieModel.getMovieRating(), is("9"));
+        assertEquals(movieModel.getMovieRating(), "9");
     }
 
     @Test
     public void rating_of_unrated_movie_should_be_unrated() {
 
         movieModel.setMovieRating(0);
-        assertThat(movieModel.getMovieRating(), is("unrated"));
+        assertEquals(movieModel.getMovieRating(), "unrated");
     }
 
 }

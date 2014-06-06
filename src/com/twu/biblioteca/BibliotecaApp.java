@@ -2,13 +2,23 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.UserService;
 
 import java.util.Scanner;
 
 public class BibliotecaApp {
 
 
+    private static String userNumber = "";
+
+
     public static void main(String[] args) {
+
+        System.out.println("**Login**");
+
+        while ( userNumber.equals("") )
+            userNumber =  UserService.checkLogin();
+
         String input;
         Scanner reader = new Scanner(System.in);
         while ( true ) {
@@ -20,8 +30,8 @@ public class BibliotecaApp {
         }
     }
 
-    private static void processInput(String input) {
 
+    private static void processInput(String input) {
         Integer i;
         try {
             i = Integer.parseInt(input);
@@ -37,6 +47,9 @@ public class BibliotecaApp {
             case 2:
                 MovieService.listMovies();
                 break;
+            case 3:
+                UserService.userInfo(userNumber);
+                break;
             default:
                 System.out.println("Select a valid option!");
                 break;
@@ -47,6 +60,7 @@ public class BibliotecaApp {
         System.out.println("Main Menu(Enter a number to select option or \"Quit\" to quit):");
         System.out.println(" 1. List Books");
         System.out.println(" 2. List Movies");
+        System.out.println(" 3. Show User Information");
     }
 
 }
