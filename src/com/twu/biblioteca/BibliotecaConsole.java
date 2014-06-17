@@ -1,25 +1,38 @@
 package com.twu.biblioteca;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.StorageService;
 import com.twu.biblioteca.service.UserService;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class BibliotecaConsole {
 
     private String QUIT = "Quit";
     private UserService userService = new UserService();
+
     private BookService bookService = new BookService();
     private MovieService movieService = new MovieService();
+
+    private final Map<String, StorageService> services;
+
     private String userNumber = "";
+    private final Scanner scanner;
+
+    public BibliotecaConsole() {
+        services = ImmutableMap.of("1", bookService, "2", movieService);
+        scanner = new Scanner(System.in);
+    }
 
     public void start() {
-        System.out.println("**Login**");
-        Scanner scanner = new Scanner(System.in);
-
-        while (userNumber.equals(""))
-            userNumber = userService.login(scanner);
+//        System.out.println("**Login**");
+        //
+//        while (userNumber.equals(""))
+//            userNumber = userService.login(scanner);
 
         String input;
         while (true) {
@@ -33,28 +46,9 @@ public class BibliotecaConsole {
 
 
     private void processInput(String input) {
-        Integer i;
-        try {
-            i = Integer.parseInt(input);
-        } catch (Exception e) {
-            System.out.println("Select a valid option!");
-            return;
-        }
-
-        switch ( i ) {
-            case 1:
-                bookService.listBooks();
-                break;
-            case 2:
-                movieService.listMovies();
-                break;
-            case 3:
-                userService.userInfo(userNumber);
-                break;
-            default:
-                System.out.println("Select a valid option!");
-                break;
-        }
+        StorageService service = services.get(input);
+        service.list();
+        service.processInput(scanner.nextLine());
     }
 
     private void showMainMenu() {
