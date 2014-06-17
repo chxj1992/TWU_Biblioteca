@@ -15,8 +15,8 @@ public class UserService {
         return "";
     }
 
-    public void userInfo(String userNumber) {
-        User user = userDao.getUserByNumber(userNumber);
+    public void userInfo(String userId) {
+        User user = userDao.getUserById(userId);
         if (user == null) {
             System.out.println("The user doesn't exist!");
             return;

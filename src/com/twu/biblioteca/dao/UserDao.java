@@ -18,19 +18,19 @@ public class UserDao {
         );
     }
 
-    public User getUserByNumber(final String number) {
+    public User getUserById(final String userId) {
 
         return FluentIterable.from(userList).firstMatch(new Predicate<User>(){
             @Override
             public boolean apply(User user) {
-                return user.getUserId().equals(number);
+                return user.getUserId().equals(userId);
             }
         }).orNull();
     }
 
-    public boolean checkLogin(String number, String password) {
+    public boolean checkLogin(String userId, String password) {
 
-        User user = getUserByNumber(number);
+        User user = getUserById(userId);
         return user != null && user.getPassword().equals(password);
     }
 

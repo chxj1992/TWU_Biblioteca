@@ -18,12 +18,12 @@ public class UserDaoTest {
     public void get_user_by_number_success() {
         String expectUsername = "Andy";
 
-        assertEquals(userDao.getUserByNumber("123-1234").getName(), expectUsername);
+        assertEquals(userDao.getUserById("123-1234").getName(), expectUsername);
     }
 
     @Test
     public void get_not_exist_user_by_number_should_be_null() {
-        assertEquals(userDao.getUserByNumber("123-1235"), null);
+        assertEquals(userDao.getUserById("123-1235"), null);
     }
 
     @Test
