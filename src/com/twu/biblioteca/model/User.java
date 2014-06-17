@@ -2,22 +2,22 @@ package com.twu.biblioteca.model;
 
 public class User {
 
-    private String number;
+    private String userId;
     private String password;
     private String name;
     private String email;
     private String phone;
 
-    public User(String number, String password, String name, String email, String phone) {
-        this.number = number;
+    public User(String userId, String password, String name, String email, String phone) {
+        this.userId = userId;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phone = phone;
     }
 
-    public String getNumber() {
-        return number;
+    public String getUserId() {
+        return userId;
     }
 
     public String getPassword() {
@@ -38,7 +38,7 @@ public class User {
 
     @Override
     public String toString() {
-        return getNumber()+" | "+
+        return getUserId()+" | "+
                 getName()+" | "+ getEmail()+" | "+ getPhone()+"\n";
     }
 

@@ -23,7 +23,7 @@ public class UserDao {
         return FluentIterable.from(userList).firstMatch(new Predicate<User>(){
             @Override
             public boolean apply(User user) {
-                return user.getNumber().equals(number);
+                return user.getUserId().equals(number);
             }
         }).orNull();
     }

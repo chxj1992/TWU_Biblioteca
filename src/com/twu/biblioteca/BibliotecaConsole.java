@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
 import com.twu.biblioteca.service.StorageService;
@@ -20,7 +19,7 @@ public class BibliotecaConsole {
 
     private final Map<String, StorageService> services;
 
-    private String userNumber = "";
+    private String userId = "";
     private final Scanner scanner;
 
     public BibliotecaConsole() {
@@ -29,10 +28,15 @@ public class BibliotecaConsole {
     }
 
     public void start() {
-//        System.out.println("**Login**");
-        //
-//        while (userNumber.equals(""))
-//            userNumber = userService.login(scanner);
+        System.out.println("**Login**");
+
+        while (userId.equals("")) {
+            System.out.println("Input your library number:");
+            String userId = scanner.nextLine();
+            System.out.println("Input password:");
+            String password = scanner.nextLine();
+            this.userId = userService.login(userId, password);
+        }
 
         String input;
         while (true) {
