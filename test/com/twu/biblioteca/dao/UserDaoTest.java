@@ -28,18 +28,17 @@ public class UserDaoTest {
 
     @Test
     public void login_success() {
-        assertTrue(userDao.login("123-1234", "123456"));
+        assertTrue(userDao.checkLogin("123-1234", "123456"));
     }
 
     @Test
     public void login_with_wrong_password() {
-        assertFalse(userDao.login("123-1234", "12345"));
+        assertFalse(userDao.checkLogin("123-1234", "12345"));
     }
 
     @Test
     public void login_with_wrong_number() {
-        assertFalse(userDao.login("123-1235", "123456"));
+        assertFalse(userDao.checkLogin("123-1235", "123456"));
     }
-
 
 }

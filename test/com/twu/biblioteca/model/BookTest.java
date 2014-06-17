@@ -6,25 +6,25 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 
-public class BookModelTest {
+public class BookTest {
 
-    private BookModel bookModel;
+    private Book book;
 
     @Before
     public void setUp() throws Exception {
-        bookModel = new BookModel("Gone with the Wind", "Margaret Mitchell", 1936, 2);
+        book = new Book("Gone with the Wind", "Margaret Mitchell", 1936, 2);
     }
 
     @Test
     public void book_name_is_right() {
         String expectName = "Gone with the Wind";
 
-        assertEquals(bookModel.getBookName(), expectName);
+        assertEquals(book.getBookName(), expectName);
     }
 
     @Test
     public void number_of_book_should_be_2() {
-        assertEquals((Object) bookModel.getBookNumber(), 2);
+        assertEquals((Object) book.getBookNumber(), 2);
     }
 
 }

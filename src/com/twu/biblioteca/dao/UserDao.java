@@ -1,38 +1,37 @@
 package com.twu.biblioteca.dao;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
-import com.twu.biblioteca.model.UserModel;
+import com.twu.biblioteca.model.User;
 
 import java.util.List;
 
 public class UserDao {
 
-    private List<UserModel> userList;
+    private List<User> userList;
 
     public UserDao() {
         userList = Lists.newArrayList(
-                new UserModel("123-1000", "123456", "Tom", "tom@gmail.com", "14643534"),
-                new UserModel("123-1234", "123456", "Andy", "andy@gmail.com", "14643545")
+                new User("123-1000", "123456", "Tom", "tom@gmail.com", "14643534"),
+                new User("123-1234", "123456", "Andy", "andy@gmail.com", "14643545")
         );
     }
 
-    public UserModel getUserByNumber(String number) {
+    public User getUserByNumber(final String number) {
 
-        for ( UserModel user : userList ) {
-            if (user.getNumber().equals(number))
-                return user;
-        }
-
-        return null;
+        return FluentIterable.from(userList).firstMatch(new Predicate<User>(){
+            @Override
+            public boolean apply(User user) {
+                return user.getNumber().equals(number);
+            }
+        }).orNull();
     }
 
-    public boolean login(String number, String password) {
+    public boolean checkLogin(String number, String password) {
 
-        UserModel user = getUserByNumber(number);
-        if( user != null && user.getPassword().equals(password) )
-            return true;
-
-        return false;
+        User user = getUserByNumber(number);
+        return user != null && user.getPassword().equals(password);
     }
 
 }

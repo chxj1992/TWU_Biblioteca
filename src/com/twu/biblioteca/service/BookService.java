@@ -1,21 +1,21 @@
 package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.dao.BookDao;
-import com.twu.biblioteca.model.BookModel;
+import com.twu.biblioteca.model.Book;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class BookService {
 
-    public static BookDao bookDao = new BookDao();
+    public BookDao bookDao = new BookDao();
 
-    public static void listBooks() {
-        List<BookModel> bookList = bookDao.getAvailableBookList();
+    public void listBooks() {
+        List<Book> bookList = bookDao.getAvailableBookList();
         System.out.println("Available book list:");
 
-        for (BookModel book : bookList)
-            System.out.println(book.getBookName()+" | "+ book.getAuthor()+" | "+book.getYear());
+        for (Book book : bookList)
+            System.out.println(book);
 
         System.out.println("Enter a number to select option:");
         System.out.println(" 1. Checkout Book");
@@ -23,10 +23,9 @@ public class BookService {
 
         String input = new Scanner(System.in).nextLine();
         processBookInput(input);
-
     }
 
-    private static void processBookInput(String input) {
+    private void processBookInput(String input) {
 
         int i;
         try {
@@ -48,7 +47,7 @@ public class BookService {
         }
     }
 
-    private static void checkoutBook() {
+    private void checkoutBook() {
         System.out.println("Input the BOOK NAME to checkout:");
         String input = new Scanner(System.in).nextLine();
 
@@ -58,7 +57,7 @@ public class BookService {
             System.out.println("That book is not available.\n");
     }
 
-    private static void returnBook() {
+    private void returnBook() {
         System.out.println("Input the BOOK NAME to return:");
         String input = new Scanner(System.in).nextLine();
 

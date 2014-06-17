@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-public class UserModel {
+public class User {
 
     private String number;
     private String password;
@@ -8,7 +8,7 @@ public class UserModel {
     private String email;
     private String phone;
 
-    public UserModel(String number, String password, String name, String email, String phone) {
+    public User(String number, String password, String name, String email, String phone) {
         this.number = number;
         this.password = password;
         this.name = name;
@@ -35,4 +35,11 @@ public class UserModel {
     public String getPhone() {
         return phone;
     }
+
+    @Override
+    public String toString() {
+        return getNumber()+" | "+
+                getName()+" | "+ getEmail()+" | "+ getPhone()+"\n";
+    }
+
 }

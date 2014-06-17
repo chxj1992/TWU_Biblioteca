@@ -1,46 +1,44 @@
 package com.twu.biblioteca.dao;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
-import com.twu.biblioteca.model.MovieModel;
+import com.twu.biblioteca.model.Movie;
 
 import java.util.List;
 
 public class MovieDao {
 
-    private List<MovieModel> movieList;
+    private List<Movie> movieList;
 
     public MovieDao() {
         movieList = Lists.newArrayList(
-                new MovieModel("The Shawshank Redemption", "Frank A. Darabont", 1994, 9, 2),
-                new MovieModel("Léon", "Luc Besson", 1994, 8, 3),
-                new MovieModel("Forrest Gump", "Robert Zemeckis", 1994, 9, 2),
-                new MovieModel("Inception", "Christopher Nolan", 2010, 0, 1),
-                new MovieModel("3 Idiots", "Raju Hirani", 2009, 9, 0)
+                new Movie("The Shawshank Redemption", "Frank A. Darabont", 1994, 9, 2),
+                new Movie("Léon", "Luc Besson", 1994, 8, 3),
+                new Movie("Forrest Gump", "Robert Zemeckis", 1994, 9, 2),
+                new Movie("Inception", "Christopher Nolan", 2010, 0, 1),
+                new Movie("3 Idiots", "Raju Hirani", 2009, 9, 0)
         );
     }
 
-    public List<MovieModel> getMovieList() {
+    public List<Movie> getMovieList() {
         return movieList;
     }
 
-    public List<MovieModel> getAvailableMovieList() {
+    public List<Movie> getAvailableMovieList() {
 
-        return Lists.newArrayList(Collections2.filter(movieList, new Predicate<MovieModel>(){
+        return FluentIterable.from(movieList).filter(new Predicate<Movie>(){
             @Override
-            public boolean apply(MovieModel movieModel) {
-                if( movieModel.getMovieNumber().equals(0) )
-                    return false;
-                return true;
+            public boolean apply(Movie movie) {
+                return movie.isAvailable();
             }
-        }));
+        }).toList();
     }
 
     public boolean checkoutMovie(String movieName) {
 
-        for ( MovieModel movie : movieList) {
-            if (movie.getMovieName().equals(movieName) && !movie.getMovieNumber().equals(0) ) {
+        for ( Movie movie : movieList) {
+            if (movie.getMovieName().equals(movieName) && movie.isAvailable()) {
                 movie.setMovieNumber(movie.getMovieNumber() - 1);
                 return true;
             }
@@ -51,7 +49,7 @@ public class MovieDao {
 
     public boolean returnMovie(String movieName) {
 
-        for (MovieModel movie : movieList) {
+        for (Movie movie : movieList) {
             if (movie.getMovieName().equals(movieName) ) {
                 movie.setMovieNumber(movie.getMovieNumber()+1);
                 return true;

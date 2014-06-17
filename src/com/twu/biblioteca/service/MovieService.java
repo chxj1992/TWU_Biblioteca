@@ -2,7 +2,7 @@ package com.twu.biblioteca.service;
 
 
 import com.twu.biblioteca.dao.MovieDao;
-import com.twu.biblioteca.model.MovieModel;
+import com.twu.biblioteca.model.Movie;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,14 +10,14 @@ import java.util.Scanner;
 public class MovieService {
 
 
-    public static MovieDao movieDao = new MovieDao();
+    public MovieDao movieDao = new MovieDao();
 
-    public static void listMovies() {
-        List<MovieModel> movieList = movieDao.getAvailableMovieList();
+    public void listMovies() {
+        List<Movie> movieList = movieDao.getAvailableMovieList();
         System.out.println("Available book list:");
 
-        for (MovieModel movie : movieList)
-            System.out.println(movie.getMovieName()+" | "+ movie.getDirector()+" | "+movie.getYear()+" | "+movie.getMovieRating());
+        for (Movie movie : movieList)
+            System.out.println(movie.toString());
 
         System.out.println("Enter a number to select option:");
         System.out.println(" 1. Checkout Movie");
@@ -28,7 +28,7 @@ public class MovieService {
 
     }
 
-    private static void processMovieInput(String input) {
+    private void processMovieInput(String input) {
 
         int i;
         try {
@@ -50,7 +50,7 @@ public class MovieService {
         }
     }
 
-    private static void checkoutMovie() {
+    private void checkoutMovie() {
         System.out.println("Input the MOVIE NAME to checkout:");
         String input = new Scanner(System.in).nextLine();
 
@@ -60,7 +60,7 @@ public class MovieService {
             System.out.println("That movie is not available.\n");
     }
 
-    private static void returnMovie() {
+    private void returnMovie() {
         System.out.println("Input the MOVIE NAME to return:");
         String input = new Scanner(System.in).nextLine();
 

@@ -8,19 +8,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 
-public class UserModelTest {
+public class UserTest {
 
-    private UserModel userModel;
+    private User user;
 
     @Before
     public void setUp() throws Exception {
-        userModel = new UserModel("123-1000", "123456", "Tom", "tom@gmail.com", "14643534");
+        user = new User("123-1000", "123456", "Tom", "tom@gmail.com", "14643534");
     }
 
     @Test
     public void user_name_is_right() {
         String expectName = "Tom";
-        assertEquals(userModel.getName(), expectName);
+        assertEquals(user.getName(), expectName);
     }
 
 
