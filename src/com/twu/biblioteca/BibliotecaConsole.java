@@ -48,11 +48,10 @@ public class BibliotecaConsole {
         }
     }
 
-
     private void processInput(String input) {
         StorageService service = services.get(input);
         service.list();
-        service.processInput(scanner.nextLine());
+        service.processServiceInput(scanner.nextLine());
     }
 
     private void showMainMenu() {

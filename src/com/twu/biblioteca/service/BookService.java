@@ -4,7 +4,6 @@ import com.twu.biblioteca.dao.BookDao;
 import com.twu.biblioteca.model.Book;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class BookService extends StorageService {
 
@@ -24,10 +23,12 @@ public class BookService extends StorageService {
     }
 
     @Override
-    public void checkout() {
-        System.out.println("Input the BOOK NAME to checkout:");
-        String input = new Scanner(System.in).nextLine();
+    public void processServiceInput(String option) {
+        processInput(option, "BOOK");
+    }
 
+    @Override
+    public void checkout(String input) {
         if ( bookDao.checkoutBook(input) )
             System.out.println("Thank you! Enjoy the book.\n");
         else
@@ -35,14 +36,12 @@ public class BookService extends StorageService {
     }
 
     @Override
-    public void returns() {
-        System.out.println("Input the BOOK NAME to return:");
-        String input = new Scanner(System.in).nextLine();
-
+    public void returns(String input) {
         if ( bookDao.returnBook(input) )
             System.out.println("Thank you for returning the book.\n");
         else
             System.out.println("That is not a valid book to return.\n");
     }
+
 
 }
