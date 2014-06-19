@@ -11,18 +11,15 @@ public class UserService {
         if (userDao.checkLogin(userId, password))
             return userId;
 
-        System.out.println("User authentication Failed! Please check your input.\n");
         return "";
     }
 
-    public void userInfo(String userId) {
+    public String userInfo(String userId) {
         User user = userDao.getUserById(userId);
-        if (user == null) {
-            System.out.println("The user doesn't exist!");
-            return;
-        }
+        if (user == null)
+            return "The user doesn't exist!";
 
-        System.out.println(user);
+        return user.toString();
     }
 
 }

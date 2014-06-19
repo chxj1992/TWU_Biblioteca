@@ -14,8 +14,8 @@ public class UserDao {
 
     public UserDao() {
         userList = Lists.newArrayList(
-                new User("123-1000", "123456", "Tom", "tom@gmail.com", "14643534"),
-                new User("123-1234", "123456", "Andy", "andy@gmail.com", "14643545")
+                new User("123-1000", "123", "Tom", "tom@gmail.com", "14643534"),
+                new User("123-1234", "123", "Andy", "andy@gmail.com", "14643545")
         );
     }
 

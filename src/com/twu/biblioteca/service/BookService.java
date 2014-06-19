@@ -5,7 +5,7 @@ import com.twu.biblioteca.dao.ItemDao;
 
 public class BookService extends ItemService {
 
-    public String name ="Book";
+    public String name ="book";
 
     public ItemDao dao = new BookDao();
 

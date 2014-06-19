@@ -2,23 +2,23 @@ package com.twu.biblioteca.model;
 
 public class Movie extends Item {
 
-    private String movieName;
+    private String name;
     private String director;
     private Integer year;
     private Integer movieRating;
-    private Integer movieNumber;
+    private Integer number;
 
-    public Movie(String movieName, String director, Integer year, Integer movieRating, Integer movieNumber) {
-        this.movieName = movieName;
+    public Movie(String name, String director, Integer year, Integer movieRating, Integer number) {
+        this.name = name;
         this.director = director;
         this.year = year;
         this.movieRating = movieRating;
-        this.movieNumber = movieNumber;
+        this.number = number;
     }
 
 
-    public String getMovieName() {
-        return movieName;
+    public String getName() {
+        return name;
     }
 
     public String getDirector() {
@@ -36,12 +36,12 @@ public class Movie extends Item {
         return String.valueOf(movieRating);
     }
 
-    public Integer getMovieNumber() {
-        return movieNumber;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setMovieNumber(Integer movieNumber) {
-        this.movieNumber = movieNumber;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public void setMovieRating(Integer movieRating) {
@@ -50,10 +50,7 @@ public class Movie extends Item {
 
     @Override
     public String toString() {
-        return getMovieName()+" | "+ getDirector()+" | "+ getYear()+" | "+ getMovieRating();
+        return getName()+" | "+ getDirector()+" | "+ getYear()+" | "+ getMovieRating() + "\n";
     }
 
-    public boolean isAvailable() {
-        return !getMovieNumber().equals(0);
-    }
 }

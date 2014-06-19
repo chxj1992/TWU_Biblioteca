@@ -6,7 +6,6 @@ import com.twu.biblioteca.model.Item;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public abstract class ItemService {
 
@@ -15,52 +14,41 @@ public abstract class ItemService {
     abstract public ItemDao getItemDao();
 
 
-    public void list() {
+    public String list() {
+        String output = "Available movie list:\n";
         List<Item> itemList = getItemDao().getAvailableList();
-        System.out.println("Available movie list:");
         for (Item item : itemList)
-            System.out.println(item.toString());
+            output += item;
 
-        serviceMenu();
+        return output;
     }
 
-    public void serviceMenu() {
-        System.out.println("Enter a number to select option:");
-        System.out.println(" 1. Checkout "+getName());
-        System.out.println(" 2. Return "+getName());
+    public String serviceMenu() {
+        return "Enter a number to select option:\n" +
+                " 1. Checkout "+getName()+"\n" +
+                " 2. Return "+getName()+"\n";
     }
 
-    public void processInput(String option) {
+    public String askForInput(String option) {
         Map<String, String> optionMap = ImmutableMap.of("1", "checkout", "2", "return");
+        if ( !optionMap.containsKey(option) )
+            return "";
 
-        System.out.println("Input the " + getName() + " NAME to " + optionMap.get(option));
-        String input = new Scanner(System.in).nextLine();
-
-        switch (option) {
-            case "1":
-                checkoutItem(input);
-                break;
-            case "2":
-                returnItem(input);
-                break;
-            default:
-                System.out.println("Please select a valid option!");
-                break;
-        }
+        return "Input the " + getName() + " name to " + optionMap.get(option) + "\n";
     }
 
-    public void checkoutItem(String input) {
+    public String checkoutItem(String input) {
         if ( getItemDao().checkoutItem(input) )
-            System.out.println("Thank you! Enjoy the "+getName()+".");
+            return "Thank you! Enjoy the "+getName()+".\n";
         else
-            System.out.println("That "+getName()+" is not available.");
+            return "That "+getName()+" is not available.\n";
     }
 
-    public void returnItem(String input) {
+    public String returnItem(String input) {
         if ( getItemDao().returnItem(input) )
-            System.out.println("Thank you for returning the "+getName()+".");
+            return "Thank you for returning the "+getName()+".\n";
         else
-            System.out.println("That is not a valid "+getName()+" to return.");
+            return "That is not a valid "+getName()+" to return.\n";
     }
 
 }

@@ -16,13 +16,6 @@ public class MovieDaoTest {
     }
 
     @Test
-    public void size_of_movie_list_should_be_5 () {
-        Integer sizeOfMovieList = movieDao.getList().size();
-
-        assertEquals((Object) sizeOfMovieList, 5);
-    }
-
-    @Test
     public void size_of_available_movie_list_should_be_4 () {
         Integer sizeOfAvailableMovieList = movieDao.getAvailableList().size();
 

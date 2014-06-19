@@ -19,12 +19,12 @@ public class BookTest {
     public void book_name_is_right() {
         String expectName = "Gone with the Wind";
 
-        assertEquals(book.getBookName(), expectName);
+        assertEquals(book.getName(), expectName);
     }
 
     @Test
     public void number_of_book_should_be_2() {
-        assertEquals((Object) book.getBookNumber(), 2);
+        assertEquals((Object) book.getNumber(), 2);
     }
 
 }

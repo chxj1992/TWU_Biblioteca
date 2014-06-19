@@ -2,36 +2,23 @@ package com.twu.biblioteca.model;
 
 public class Book extends Item {
 
-    private String bookName;
+    private String name;
     private String author;
     private Integer year;
-    private Integer bookNumber;
+    private Integer number;
 
-    public Book(String bookName, String author, Integer year, Integer bookNumber) {
-        this.bookName = bookName;
+    public Book(String name, String author, Integer year, Integer number) {
+        this.name = name;
         this.author = author;
         this.year = year;
-        this.bookNumber = bookNumber;
+        this.number = number;
     }
 
-    public Book(String bookName, String author, Integer year) {
-        this.bookName = bookName;
+    public Book(String name, String author, Integer year) {
+        this.name = name;
         this.author = author;
         this.year = year;
-        this.bookNumber = 1;
-    }
-
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public Integer getBookNumber() {
-        return bookNumber;
-    }
-
-    public void setBookNumber(Integer bookNumber) {
-        this.bookNumber = bookNumber;
+        this.number = 1;
     }
 
     public String getAuthor() {
@@ -43,11 +30,23 @@ public class Book extends Item {
     }
 
     @Override
-    public String toString() {
-        return getBookName()+" | "+ getAuthor()+" | "+ getYear();
+    public Integer getNumber() {
+        return number;
     }
 
-    public boolean isAvailable() {
-        return !getBookNumber().equals(0);
+    @Override
+    public String getName() {
+        return name;
     }
+
+    @Override
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return getName()+" | "+ getAuthor()+" | "+ getYear() + "\n";
+    }
+
 }

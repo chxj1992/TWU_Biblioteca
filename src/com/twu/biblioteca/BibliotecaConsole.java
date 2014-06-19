@@ -19,8 +19,9 @@ public class BibliotecaConsole {
 
     private final Map<String, ItemService> services;
 
-    private String userId = "";
     private final Scanner scanner;
+
+    private String userId = "";
 
     public BibliotecaConsole() {
         services = ImmutableMap.of("1", bookService, "2", movieService);
@@ -36,30 +37,59 @@ public class BibliotecaConsole {
             System.out.println("Input password:");
             String password = scanner.nextLine();
             this.userId = userService.login(userId, password);
+            if ( this.userId == "" )
+                System.out.println("User authentication Failed! Please check your input.\n");
         }
 
-        String input;
         while (true) {
             mainMenu();
-            input = scanner.nextLine();
-            if (input.equals(QUIT))
-                break;
-            processInput(input);
+            if ( !processMainMenuInput(scanner.nextLine()) ) break;
         }
     }
 
-    private void processInput(String input) {
-        ItemService service = services.get(input);
-        service.list();
-        service.processInput(scanner.nextLine());
-    }
-
-
     private void mainMenu() {
+        System.out.println("");
         System.out.println("Main Menu(Enter a number to select option or \"Quit\" to quit):");
         System.out.println(" 1. List Books");
         System.out.println(" 2. List Movies");
         System.out.println(" 3. Show User Information");
+    }
+
+    private boolean processMainMenuInput(String option) {
+        if ( QUIT.equals(option) )
+            return false;
+        ItemService service = services.get(option);
+        if ( service != null ) {
+            serviceMenu(service);
+            processServiceMenuInput(service, scanner.nextLine());
+        } else if ( option.equals("3") ) {
+            System.out.print(userService.userInfo(userId));
+        } else {
+            System.out.println("Please input a valid option!");
+        }
+
+        return true;
+    }
+
+
+    private void serviceMenu(ItemService service) {
+        System.out.print(service.list());
+        System.out.print(service.serviceMenu());
+    }
+
+    private void processServiceMenuInput(ItemService service, String option) {
+        System.out.print(service.askForInput(option));
+
+        switch (option) {
+            case "1":
+                System.out.print(service.checkoutItem(scanner.nextLine()));
+                break;
+            case "2":
+                System.out.print(service.returnItem(scanner.nextLine()));
+                break;
+            default:
+                System.out.println("Please select a valid option!");
+        }
     }
 
 

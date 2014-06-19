@@ -6,7 +6,7 @@ import com.twu.biblioteca.dao.MovieDao;
 
 public class MovieService extends ItemService {
 
-    public String name ="Movie";
+    public String name ="movie";
 
     public ItemDao dao = new MovieDao();
 

@@ -19,12 +19,12 @@ public class MovieTest {
     public void movie_name_is_right() {
         String expectName = "The Shawshank Redemption";
 
-        assertEquals(movie.getMovieName(), expectName);
+        assertEquals(movie.getName(), expectName);
     }
 
     @Test
     public void number_of_movie_should_be_2() {
-        assertEquals((Object) movie.getMovieNumber(), 2);
+        assertEquals((Object) movie.getNumber(), 2);
     }
 
     @Test

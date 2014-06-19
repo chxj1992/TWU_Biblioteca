@@ -16,13 +16,6 @@ public class BookDaoTest {
     }
 
     @Test
-    public void size_of_book_list_should_be_5 () {
-        Integer sizeOfBookList = bookDao.getList().size();
-
-        assertEquals((Object) sizeOfBookList, 5);
-    }
-
-    @Test
     public void size_of_available_book_list_should_be_4 () {
         Integer sizeOfAvailableBookList = bookDao.getAvailableList().size();
 

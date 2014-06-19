@@ -1,7 +1,5 @@
 package com.twu.biblioteca.dao;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.twu.biblioteca.model.Book;
 
@@ -21,46 +19,9 @@ public class BookDao extends ItemDao {
         );
     }
 
+    @Override
     public List getList() {
         return bookList;
     }
-
-    @Override
-    public List getAvailableList() {
-
-        return FluentIterable.from(bookList).filter(new Predicate<Book>(){
-            @Override
-            public boolean apply(Book book) {
-                return book.isAvailable();
-            }
-        }).toList();
-    }
-
-    @Override
-    public boolean checkoutItem(String bookName) {
-
-        for ( Book book : bookList ) {
-            if (book.getBookName().equals(bookName) && book.isAvailable()) {
-                book.setBookNumber(book.getBookNumber()-1);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean returnItem(String itemName) {
-
-        for ( Book book : bookList ) {
-            if (book.getBookName().equals(itemName) ) {
-                book.setBookNumber(book.getBookNumber()+1);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
 
 }
