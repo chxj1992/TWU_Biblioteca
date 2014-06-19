@@ -17,41 +17,41 @@ public class BookDaoTest {
 
     @Test
     public void size_of_book_list_should_be_5 () {
-        Integer sizeOfBookList = bookDao.getBookList().size();
+        Integer sizeOfBookList = bookDao.getList().size();
 
         assertEquals((Object) sizeOfBookList, 5);
     }
 
     @Test
     public void size_of_available_book_list_should_be_4 () {
-        Integer sizeOfAvailableBookList = bookDao.getAvailableBookList().size();
+        Integer sizeOfAvailableBookList = bookDao.getAvailableList().size();
 
         assertEquals((Object) sizeOfAvailableBookList, 4);
     }
 
     @Test
     public void checkout_book_successful() {
-        assertTrue(bookDao.checkoutBook("Lord of the Rings"));
+        assertTrue(bookDao.checkoutItem("Lord of the Rings"));
     }
 
     @Test
     public void checkout_book_not_exist() {
-        assertFalse(bookDao.checkoutBook("Lord of the Chains"));
+        assertFalse(bookDao.checkoutItem("Lord of the Chains"));
     }
 
     @Test
     public void checkout_book_not_in_stock() {
-        assertFalse(bookDao.checkoutBook("A Tale of Two Cities"));
+        assertFalse(bookDao.checkoutItem("A Tale of Two Cities"));
     }
 
     @Test
     public void return_book_successful() {
-        assertTrue(bookDao.returnBook("Lord of the Rings"));
+        assertTrue(bookDao.returnItem("Lord of the Rings"));
     }
 
     @Test
     public void return_book_not_belong_to_the_library() {
-        assertFalse(bookDao.returnBook("Head First Java"));
+        assertFalse(bookDao.returnItem("Head First Java"));
     }
 
 }

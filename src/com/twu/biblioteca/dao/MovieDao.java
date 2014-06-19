@@ -7,7 +7,7 @@ import com.twu.biblioteca.model.Movie;
 
 import java.util.List;
 
-public class MovieDao {
+public class MovieDao extends ItemDao {
 
     private List<Movie> movieList;
 
@@ -21,12 +21,12 @@ public class MovieDao {
         );
     }
 
-    public List<Movie> getMovieList() {
+    public List<Movie> getList() {
         return movieList;
     }
 
-    public List<Movie> getAvailableMovieList() {
-
+    @Override
+    public List getAvailableList() {
         return FluentIterable.from(movieList).filter(new Predicate<Movie>(){
             @Override
             public boolean apply(Movie movie) {
@@ -35,10 +35,12 @@ public class MovieDao {
         }).toList();
     }
 
-    public boolean checkoutMovie(String movieName) {
+
+    @Override
+    public boolean checkoutItem(String itemName) {
 
         for ( Movie movie : movieList) {
-            if (movie.getMovieName().equals(movieName) && movie.isAvailable()) {
+            if (movie.getMovieName().equals(itemName) && movie.isAvailable()) {
                 movie.setMovieNumber(movie.getMovieNumber() - 1);
                 return true;
             }
@@ -47,10 +49,11 @@ public class MovieDao {
         return false;
     }
 
-    public boolean returnMovie(String movieName) {
+    @Override
+    public boolean returnItem(String itemName) {
 
         for (Movie movie : movieList) {
-            if (movie.getMovieName().equals(movieName) ) {
+            if (movie.getMovieName().equals(itemName) ) {
                 movie.setMovieNumber(movie.getMovieNumber()+1);
                 return true;
             }

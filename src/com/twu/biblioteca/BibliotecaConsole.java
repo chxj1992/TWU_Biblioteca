@@ -2,8 +2,8 @@ package com.twu.biblioteca;
 
 import com.google.common.collect.ImmutableMap;
 import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.ItemService;
 import com.twu.biblioteca.service.MovieService;
-import com.twu.biblioteca.service.StorageService;
 import com.twu.biblioteca.service.UserService;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ public class BibliotecaConsole {
     private BookService bookService = new BookService();
     private MovieService movieService = new MovieService();
 
-    private final Map<String, StorageService> services;
+    private final Map<String, ItemService> services;
 
     private String userId = "";
     private final Scanner scanner;
@@ -40,7 +40,7 @@ public class BibliotecaConsole {
 
         String input;
         while (true) {
-            showMainMenu();
+            mainMenu();
             input = scanner.nextLine();
             if (input.equals(QUIT))
                 break;
@@ -49,12 +49,13 @@ public class BibliotecaConsole {
     }
 
     private void processInput(String input) {
-        StorageService service = services.get(input);
+        ItemService service = services.get(input);
         service.list();
-        service.processServiceInput(scanner.nextLine());
+        service.processInput(scanner.nextLine());
     }
 
-    private void showMainMenu() {
+
+    private void mainMenu() {
         System.out.println("Main Menu(Enter a number to select option or \"Quit\" to quit):");
         System.out.println(" 1. List Books");
         System.out.println(" 2. List Movies");

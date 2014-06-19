@@ -1,11 +1,12 @@
 package com.twu.biblioteca.dao;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.twu.biblioteca.model.User;
 
 import java.util.List;
+
+import static com.google.common.collect.FluentIterable.from;
 
 public class UserDao {
 
@@ -20,7 +21,7 @@ public class UserDao {
 
     public User getUserById(final String userId) {
 
-        return FluentIterable.from(userList).firstMatch(new Predicate<User>(){
+        return from(userList).firstMatch(new Predicate<User>(){
             @Override
             public boolean apply(User user) {
                 return user.getUserId().equals(userId);

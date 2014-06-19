@@ -7,7 +7,7 @@ import com.twu.biblioteca.model.Book;
 
 import java.util.List;
 
-public class BookDao {
+public class BookDao extends ItemDao {
 
     private List<Book> bookList;
 
@@ -21,11 +21,12 @@ public class BookDao {
         );
     }
 
-    public List<Book> getBookList() {
+    public List getList() {
         return bookList;
     }
 
-    public List<Book> getAvailableBookList() {
+    @Override
+    public List getAvailableList() {
 
         return FluentIterable.from(bookList).filter(new Predicate<Book>(){
             @Override
@@ -35,7 +36,8 @@ public class BookDao {
         }).toList();
     }
 
-    public boolean checkoutBook(String bookName) {
+    @Override
+    public boolean checkoutItem(String bookName) {
 
         for ( Book book : bookList ) {
             if (book.getBookName().equals(bookName) && book.isAvailable()) {
@@ -47,10 +49,11 @@ public class BookDao {
         return false;
     }
 
-    public boolean returnBook(String bookName) {
+    @Override
+    public boolean returnItem(String itemName) {
 
         for ( Book book : bookList ) {
-            if (book.getBookName().equals(bookName) ) {
+            if (book.getBookName().equals(itemName) ) {
                 book.setBookNumber(book.getBookNumber()+1);
                 return true;
             }
@@ -58,5 +61,6 @@ public class BookDao {
 
         return false;
     }
+
 
 }

@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-public class Book {
+public class Book extends Item {
 
     private String bookName;
     private String author;
