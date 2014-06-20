@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.google.common.collect.ImmutableMap;
+import com.twu.biblioteca.dao.BookDao;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.ItemService;
 import com.twu.biblioteca.service.MovieService;
