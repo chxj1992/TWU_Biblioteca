@@ -2,7 +2,9 @@ package com.twu.biblioteca.service;
 
 import com.google.common.collect.Lists;
 import com.twu.biblioteca.dao.BookDao;
+import com.twu.biblioteca.dao.MovieDao;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.Movie;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,69 +17,69 @@ import static org.mockito.Mockito.mock;
 
 public class MovieServiceTest {
 
-    private BookService bookService;
-    private BookDao bookDao;
+    private MovieService movieService;
+    private MovieDao movieDao;
 
     @Before
     public void before() throws Exception {
-        bookDao = mock(BookDao.class);
-        bookService = new BookService();
-        bookService.setItemDao(bookDao);
+        movieDao = mock(MovieDao.class);
+        movieService = new MovieService();
+        movieService.setItemDao(movieDao);
     }
 
     @Test
     public void should_get_the_right_service_name() {
-        String serviceName = bookService.getName();
+        String serviceName = movieService.getName();
 
-        assertThat(serviceName).isEqualTo("book");
+        assertThat(serviceName).isEqualTo("movie");
     }
 
     @Test
-    public void should_return_right_book_list() {
-        List<Book> books = Lists.newArrayList(new Book("Lord of the Rings", "J.R.R.Tolkien", 1954, 3));
-        given(bookDao.getAvailableList()).willReturn(books);
+    public void should_return_right_movie_list() {
+        List<Movie> movies = Lists.newArrayList( new Movie("The Shawshank Redemption", "Frank A. Darabont", 1994, 9, 2));
+        given(movieDao.getAvailableList()).willReturn(movies);
 
-        String listInfo = bookService.list();
+        String listInfo = movieService.list();
 
-        assertThat(listInfo).isEqualTo("Available book list:\n" +
-                "Lord of the Rings | J.R.R.Tolkien | 1954\n");
+        assertThat(listInfo).isEqualTo("Available movie list:\n" +
+                "The Shawshank Redemption | Frank A. Darabont | 1994 | 9\n");
     }
 
     @Test
     public void should_return_success_info_when_checkout_success() {
-        given(bookDao.checkoutItem(anyString())).willReturn(true);
+        given(movieDao.checkoutItem(anyString())).willReturn(true);
 
-        String checkoutInfo = bookService.checkoutItem("");
+        String checkoutInfo = movieService.checkoutItem("");
 
-        assertThat(checkoutInfo).isEqualTo("Thank you! Enjoy the book.\n");
+        assertThat(checkoutInfo).isEqualTo("Thank you! Enjoy the movie.\n");
     }
 
     @Test
     public void should_return_fail_info_when_checkout_fail() {
-        given(bookDao.checkoutItem(anyString())).willReturn(false);
+        given(movieDao.checkoutItem(anyString())).willReturn(false);
 
-        String checkoutInfo = bookService.checkoutItem("");
+        String checkoutInfo = movieService.checkoutItem("");
 
-        assertThat(checkoutInfo).isEqualTo("That book is not available.\n");
+        assertThat(checkoutInfo).isEqualTo("That movie is not available.\n");
     }
 
 
     @Test
     public void should_return_success_info_when_return_success() {
-        given(bookDao.returnItem(anyString())).willReturn(true);
+        given(movieDao.returnItem(anyString())).willReturn(true);
 
-        String checkoutInfo = bookService.returnItem("");
+        String checkoutInfo = movieService.returnItem("");
 
-        assertThat(checkoutInfo).isEqualTo("Thank you for returning the book.\n");
+        assertThat(checkoutInfo).isEqualTo("Thank you for returning the movie.\n");
     }
 
     @Test
     public void should_return_fail_info_when_return_fail() {
-        given(bookDao.returnItem(anyString())).willReturn(false);
+        given(movieDao.returnItem(anyString())).willReturn(false);
 
-        String checkoutInfo = bookService.returnItem("");
+        String checkoutInfo = movieService.returnItem("");
 
-        assertThat(checkoutInfo).isEqualTo("That is not a valid book to return.\n");
+        assertThat(checkoutInfo).isEqualTo("That is not a valid movie to return.\n");
     }
 
 }
