@@ -15,7 +15,7 @@ public abstract class ItemService {
 
 
     public String list() {
-        String output = "Available movie list:\n";
+        String output = "Available " + getName() + " list:\n";
         List<Item> itemList = getItemDao().getAvailableList();
         for (Item item : itemList)
             output += item;

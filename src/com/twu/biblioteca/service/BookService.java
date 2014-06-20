@@ -7,7 +7,8 @@ public class BookService extends ItemService {
 
     public String name ="book";
 
-    public ItemDao dao = new BookDao();
+
+    public ItemDao itemDao = new BookDao();
 
 
     @Override
@@ -17,7 +18,11 @@ public class BookService extends ItemService {
 
     @Override
     public ItemDao getItemDao() {
-        return dao;
+        return itemDao;
+    }
+
+    public void setItemDao(ItemDao itemDao) {
+        this.itemDao = itemDao;
     }
 
 }

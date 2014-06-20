@@ -7,6 +7,10 @@ public class UserService {
 
     private UserDao userDao = new UserDao();
 
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public String login(String userId, String password) {
         if (userDao.checkLogin(userId, password))
             return userId;
@@ -21,5 +25,6 @@ public class UserService {
 
         return user.toString();
     }
+    
 
 }

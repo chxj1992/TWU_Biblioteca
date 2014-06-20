@@ -8,7 +8,7 @@ public class MovieService extends ItemService {
 
     public String name ="movie";
 
-    public ItemDao dao = new MovieDao();
+    public ItemDao itemDao = new MovieDao();
 
     @Override
     public String getName() {
@@ -17,7 +17,11 @@ public class MovieService extends ItemService {
 
     @Override
     public ItemDao getItemDao() {
-        return dao;
+        return itemDao;
+    }
+
+    public void setItemDao(ItemDao itemDao) {
+        this.itemDao = itemDao;
     }
 
 }

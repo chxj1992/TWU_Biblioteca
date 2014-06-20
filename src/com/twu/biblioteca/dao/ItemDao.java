@@ -1,26 +1,27 @@
 package com.twu.biblioteca.dao;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
 import com.twu.biblioteca.model.Item;
 
 import java.util.List;
 
-public abstract class ItemDao {
+import static com.google.common.collect.FluentIterable.from;
 
-    public abstract List<Item> getList();
+public abstract class ItemDao<T extends Item> {
 
-    public List<Item> getAvailableList() {
-        return FluentIterable.from(getList()).filter(new Predicate<Item>(){
+    public abstract List<T> getList();
+
+    public List<T> getAvailableList() {
+        return from(getList()).filter(new Predicate<T>(){
             @Override
-            public boolean apply(Item item) {
+            public boolean apply(T item) {
                 return item.isAvailable();
             }
         }).toList();
     }
 
     public boolean checkoutItem(String itemName) {
-        for ( Item item : getList() ) {
+        for ( T item : getList() ) {
             if (item.getName().equals(itemName) && item.isAvailable()) {
                 item.setNumber(item.getNumber() - 1);
                 return true;
@@ -31,7 +32,7 @@ public abstract class ItemDao {
     }
 
     public boolean returnItem(String itemName) {
-        for (Item item : getList()) {
+        for (T item : getList()) {
             if (item.getName().equals(itemName) ) {
                 item.setNumber(item.getNumber() + 1);
                 return true;

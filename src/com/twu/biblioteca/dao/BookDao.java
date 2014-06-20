@@ -20,7 +20,7 @@ public class BookDao extends ItemDao {
     }
 
     @Override
-    public List getList() {
+    public List<Book> getList() {
         return bookList;
     }
 
