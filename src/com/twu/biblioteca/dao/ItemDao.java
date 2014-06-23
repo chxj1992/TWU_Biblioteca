@@ -12,7 +12,7 @@ public abstract class ItemDao<T extends Item> {
     public abstract List<T> getList();
 
     public List<T> getAvailableList() {
-        return from(getList()).filter(new Predicate<T>(){
+        return from(getList()).filter(new Predicate<T>() {
             @Override
             public boolean apply(T item) {
                 return item.isAvailable();
@@ -21,7 +21,7 @@ public abstract class ItemDao<T extends Item> {
     }
 
     public boolean checkoutItem(String itemName) {
-        for ( T item : getList() ) {
+        for (T item : getList()) {
             if (item.getName().equals(itemName) && item.isAvailable()) {
                 item.setNumber(item.getNumber() - 1);
                 return true;
@@ -33,7 +33,7 @@ public abstract class ItemDao<T extends Item> {
 
     public boolean returnItem(String itemName) {
         for (T item : getList()) {
-            if (item.getName().equals(itemName) ) {
+            if (item.getName().equals(itemName)) {
                 item.setNumber(item.getNumber() + 1);
                 return true;
             }

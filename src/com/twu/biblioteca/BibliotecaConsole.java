@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import com.google.common.collect.ImmutableMap;
-import com.twu.biblioteca.dao.BookDao;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.ItemService;
 import com.twu.biblioteca.service.MovieService;
@@ -12,11 +11,8 @@ import java.util.Scanner;
 
 public class BibliotecaConsole {
 
-    private String QUIT = "Quit";
+    private static final String QUIT = "Quit";
     private UserService userService = new UserService();
-
-    private BookService bookService = new BookService();
-    private MovieService movieService = new MovieService();
 
     private final Map<String, ItemService> services;
 
@@ -25,7 +21,7 @@ public class BibliotecaConsole {
     private String userId = "";
 
     public BibliotecaConsole() {
-        services = ImmutableMap.of("1", bookService, "2", movieService);
+        services = ImmutableMap.of("1", new BookService(), "2", new MovieService());
         scanner = new Scanner(System.in);
     }
 
@@ -38,7 +34,7 @@ public class BibliotecaConsole {
             System.out.println("Input password:");
             String password = scanner.nextLine();
             this.userId = userService.login(userId, password);
-            if ( this.userId == "" )
+            if (this.userId.equals(""))
                 System.out.println("User authentication Failed! Please check your input.\n");
         }
 

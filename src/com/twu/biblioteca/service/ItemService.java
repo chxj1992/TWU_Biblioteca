@@ -15,40 +15,41 @@ public abstract class ItemService {
 
 
     public String list() {
-        String output = "Available " + getName() + " list:\n";
+        StringBuilder builder = new StringBuilder("Available " + getName() + " list:\n");
         List<Item> itemList = getItemDao().getAvailableList();
         for (Item item : itemList)
-            output += item;
+            builder.append(item);
 
-        return output;
+        return builder.toString();
     }
 
     public String serviceMenu() {
         return "Enter a number to select option:\n" +
-                " 1. Checkout "+getName()+"\n" +
-                " 2. Return "+getName()+"\n";
+                " 1. Checkout " + getName() + "\n" +
+                " 2. Return " + getName() + "\n";
     }
 
     public String askForInput(String option) {
         Map<String, String> optionMap = ImmutableMap.of("1", "checkout", "2", "return");
-        if ( !optionMap.containsKey(option) )
-            return "";
+        if (optionMap.containsKey(option)) {
+            return "Input the " + getName() + " name to " + optionMap.get(option) + "\n";
+        }
+        return "";
 
-        return "Input the " + getName() + " name to " + optionMap.get(option) + "\n";
     }
 
     public String checkoutItem(String input) {
-        if ( getItemDao().checkoutItem(input) )
-            return "Thank you! Enjoy the "+getName()+".\n";
+        if (getItemDao().checkoutItem(input))
+            return "Thank you! Enjoy the " + getName() + ".\n";
         else
-            return "That "+getName()+" is not available.\n";
+            return "That " + getName() + " is not available.\n";
     }
 
     public String returnItem(String input) {
-        if ( getItemDao().returnItem(input) )
-            return "Thank you for returning the "+getName()+".\n";
+        if (getItemDao().returnItem(input))
+            return "Thank you for returning the " + getName() + ".\n";
         else
-            return "That is not a valid "+getName()+" to return.\n";
+            return "That is not a valid " + getName() + " to return.\n";
     }
 
 }
